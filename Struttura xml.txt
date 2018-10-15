@@ -1,0 +1,58 @@
+Vecchio schema:
+
+Biblioteca
+	wiride
+		codice_scheda
+		codice_dewey
+		dati_amministrativi
+			inventario
+			data
+			prezzo
+			collocazione
+			provenienza
+			disponibilita
+			euro
+		localizzazione
+			istituzione
+			citta
+			data
+		tipo_materiale
+		titolo
+			proprio
+			responsabilita
+		autore
+			nome
+			cognome
+			cod_autore			
+		pubblicazione
+			luogo
+			editore
+			cod_editore
+		descrizione_fisica
+			pagine_volumi
+		collezione
+			t_collezione
+			numero_collezione
+			t_sottocollezione
+		note
+			note_edizione
+		paese_pubblicazione
+		lingua
+		catalogatore
+	
+			
+Nuovo:
+barcode {chiave, vedi inventario}
+title
+author {nome + " " + cognome}
+subject
+description
+category
+media { sempre libro }
+publisher
+publocation
+pubdate {dati_amministrativi -> data}
+edition
+isbn
+callnumber
+keywords {vedi codice_dewey}
