@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+
 
 namespace XmlLibrary.OldFormat
 {
@@ -10,7 +13,9 @@ namespace XmlLibrary.OldFormat
     {
         public string ;
         public string Author;
-        public DatiAmministrativi dati_amministrativi;
+
+        [XmlElement(ElementName = "dati_amminisrativi")]
+        public AmministrativeData AmministrativeData ;
 
     }
 }

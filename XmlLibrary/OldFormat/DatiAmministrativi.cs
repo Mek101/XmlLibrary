@@ -12,6 +12,8 @@ namespace XmlLibrary.OldFormat
     {
         [XmlElement(ElementName = "inventario")]
         public uint Inventory;
+
+        [XmlElement(ElementName = "data")]
         public string Data;
     }
 }
