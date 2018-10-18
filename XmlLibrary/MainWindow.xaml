@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XmlLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="188.182" Width="800">
+    <Grid Height="157" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnConvert" Content="Convert" Margin="227,106,0,0" HorizontalAlignment="Left" Width="338" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtOldPath" HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Width="330" Height="40" VerticalAlignment="Top"/>
+        <Label x:Name="lblFrom" Content="From" Margin="10,10,0,97"/>
+        <TextBox x:Name="txtTo" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="49,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="337"/>
+        <Label x:Name="lblTo" Content="To" Grid.Column="1" Margin="49,10,10,97"/>
+
     </Grid>
 </Window>
