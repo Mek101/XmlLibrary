@@ -24,5 +24,10 @@ namespace XmlLibrary
         {
             InitializeComponent();
         }
+
+        private void btnConvert_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
