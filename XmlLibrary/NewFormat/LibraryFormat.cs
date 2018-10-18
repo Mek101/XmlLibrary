@@ -11,7 +11,7 @@ namespace XmlLibrary.NewFormat
     class LibraryFormat
     {
         [System.Xml.Serialization.XmlElement(ElementName = "barcode")]
-        public string barcode;
+        public uint barcode;
 
         [System.Xml.Serialization.XmlElement(ElementName = "title")]
         public string title;

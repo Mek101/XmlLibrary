@@ -24,7 +24,7 @@ namespace XmlLibrary.OldFormat
         [System.Xml.Serialization.XmlElement(ElementName = "dati_amministrativi")]
         public AmministrativeData AmministrativeData;
 
-        [System.Xml.Serialization.XmlElement(ElementName = "descrizione_fisica")]
+        [System.Xml.Serialization.XmlElement(ElementName = "abstract")]
         public Description Description;
 
         [System.Xml.Serialization.XmlElement(ElementName = "pubblicazione")]
@@ -33,5 +33,7 @@ namespace XmlLibrary.OldFormat
         [System.Xml.Serialization.XmlElement(ElementName = "note")]
         public Edition Edition;
 
+        [System.Xml.Serialization.XmlElement(ElementName = "tipo_materiale")]
+        public string FormatType;
     }
 }
