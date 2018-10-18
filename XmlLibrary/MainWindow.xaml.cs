@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Text;
 
 namespace XmlLibrary
 {
@@ -27,7 +29,21 @@ namespace XmlLibrary
 
         private void btnConvert_Click(object sender, RoutedEventArgs e)
         {
+            // get the text into the two textboxes
+            if (String.IsNullOrEmpty(txtFrom.Text) || String.IsNullOrEmpty(txtTo.Text)) {
+                // show outsise a message to warn the user
+                var label = (txtFrom.Text == String.Empty ? txtFrom : txtTo);
 
+                MessageBox.Show("Missing " + (String.IsNullOrEmpty(txtFrom.Text) ? "From" : "To") + " path");
+                return;
+            }
+
+            // load the file
+            string text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+            if (String.IsNullOrEmpty(text)) {
+                MessageBox.Show(txtFrom.Text + " doesn't contains any text");
+                return;
+            }
         }
     }
 }

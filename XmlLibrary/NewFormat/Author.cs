@@ -12,9 +12,9 @@ namespace XmlLibrary.NewFormat
     class Author
     {
         [System.Xml.Serialization.XmlElement(ElementName = "name")]
-        public string name;
+        public string Name;
 
         [System.Xml.Serialization.XmlElement(ElementName = "surname")]
-        public string surname;
+        public string Surname;
     }
 }

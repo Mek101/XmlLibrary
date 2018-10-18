@@ -23,7 +23,10 @@ Biblioteca
 		autore
 			nome
 			cognome
-			cod_autore			
+			cod_autore
+		edizione
+			ed_indicazione
+			ed_responsabilità
 		pubblicazione
 			luogo
 			editore
@@ -38,21 +41,23 @@ Biblioteca
 			note_edizione
 		paese_pubblicazione
 		lingua
+		genere
+		abstract
 		catalogatore
 	
 			
 Nuovo:
-barcode {chiave, vedi inventario}
-title											x
-author {nome + " " + cognome}					x
-subject 
-description {descrizione_fisica > pagine_volumi} x
-category {codice_dewey}							x
-media { sempre libro }							x
-publisher										x
-publocation										x
-pubdate {dati_amministrativi -> data}			x
-edition {note > note_edizione}					x	
-isbn
-callnumber
-keywords {vedi codice_dewey}
+	barcode {chiave, vedi inventario}
+	title											 x
+	author {nome + " " + cognome}					 x
+	subject 
+	description {abstract}	 						 x
+	category {genere}							 	 x
+	media { tipo_materiale }						 x
+	publisher										 x
+	publocation										 x
+	pubdate {dati_amministrativi -> data}			 x
+	edition {note > note_edizione}					 x	
+	isbn
+	callnumber
+	keywords {vedi codice_dewey}					 x
