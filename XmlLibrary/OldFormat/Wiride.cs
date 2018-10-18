@@ -11,8 +11,11 @@ namespace XmlLibrary.OldFormat
 {
     class Wiride
     {
-        public string ;
-        public string Author;
+        [System.Xml.Serialization.XmlElement(ElementName = "titolo")]
+        public Title Title;
+
+        [XmlElement(ElementName = "autore")]
+        public Author Author;
 
         [XmlElement(ElementName = "dati_amminisrativi")]
         public AmministrativeData AmministrativeData ;
