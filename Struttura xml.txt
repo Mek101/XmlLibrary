@@ -43,16 +43,16 @@ Biblioteca
 			
 Nuovo:
 barcode {chiave, vedi inventario}
-title
-author {nome + " " + cognome}
-subject
-description
-category
-media { sempre libro }
-publisher
-publocation
-pubdate {dati_amministrativi -> data}
-edition
+title											x
+author {nome + " " + cognome}					x
+subject 
+description {descrizione_fisica > pagine_volumi} x
+category {codice_dewey}							x
+media { sempre libro }							x
+publisher										x
+publocation										x
+pubdate {dati_amministrativi -> data}			x
+edition {note > note_edizione}					x	
 isbn
 callnumber
 keywords {vedi codice_dewey}
