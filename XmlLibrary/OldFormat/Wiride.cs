@@ -30,7 +30,7 @@ namespace XmlLibrary.OldFormat
         [System.Xml.Serialization.XmlElement(ElementName = "pubblicazione")]
         public Publishing Publishing;
 
-        [System.Xml.Serialization.XmlElement(ElementName = "note")]
+        [System.Xml.Serialization.XmlElement(ElementName = "edizione")]
         public Edition Edition;
 
         [System.Xml.Serialization.XmlElement(ElementName = "tipo_materiale")]

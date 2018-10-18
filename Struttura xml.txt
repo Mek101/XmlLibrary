@@ -23,7 +23,10 @@ Biblioteca
 		autore
 			nome
 			cognome
-			cod_autore			
+			cod_autore
+		edizione
+			ed_indicazione
+			ed_responsabilità
 		pubblicazione
 			luogo
 			editore

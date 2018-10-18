@@ -8,7 +8,10 @@ namespace XmlLibrary.OldFormat
 {
     class Edition
     {
-        [System.Xml.Serialization.XmlElement(ElementName = "note_edizione")]
-        public string Notes;
+        [System.Xml.Serialization.XmlElement(ElementName = "ed_indicazione")]
+        public string Indication;
+
+        [System.Xml.Serialization.XmlElement(ElementName = "ed_responsabilita")]
+        public string Responsability;
     }
 }
