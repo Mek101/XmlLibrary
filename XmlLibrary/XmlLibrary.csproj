@@ -69,6 +69,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewFormat\Author.cs" />
+    <Compile Include="NewFormat\LibraryFormat.cs" />
     <Compile Include="OldFormat\Author.cs" />
     <Compile Include="OldFormat\DatiAmministrativi.cs" />
     <Compile Include="OldFormat\Description.cs" />
