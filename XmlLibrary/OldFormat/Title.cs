@@ -8,7 +8,10 @@ namespace XmlLibrary.OldFormat
 {
     class Title
     {
+        [System.Xml.Serialization.XmlElement(ElementName = "proprio")]
         public string Own;
+
+        [System.Xml.Serialization.XmlElement(ElementName = "responsabilita")]
         public string Responsability;
     }
 }

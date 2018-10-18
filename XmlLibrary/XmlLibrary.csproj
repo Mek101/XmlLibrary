@@ -45,6 +45,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Serialization" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -68,6 +69,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OldFormat\Author.cs" />
     <Compile Include="OldFormat\DatiAmministrativi.cs" />
     <Compile Include="OldFormat\Title.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
