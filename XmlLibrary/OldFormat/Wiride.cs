@@ -25,7 +25,7 @@ namespace XmlLibrary.OldFormat
         public string Description;
 
         [System.Xml.Serialization.XmlElement(ElementName = "genere")]
-        public string Type;
+        public string Category;
 
         [System.Xml.Serialization.XmlElement(ElementName = "tipo_materiale")]
         public string FormatType;
