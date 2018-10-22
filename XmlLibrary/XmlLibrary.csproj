@@ -72,11 +72,6 @@
     <Compile Include="NewFormat\Author.cs" />
     <Compile Include="NewFormat\LibraryFormat.cs" />
     <Compile Include="OldFormat\Author.cs" />
-    <Compile Include="OldFormat\DatiAmministrativi.cs" />
-    <Compile Include="OldFormat\Description.cs" />
-    <Compile Include="OldFormat\Edition.cs" />
-    <Compile Include="OldFormat\Publishing.cs" />
-    <Compile Include="OldFormat\Title.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

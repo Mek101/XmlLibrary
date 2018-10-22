@@ -14,9 +14,6 @@ namespace XmlLibrary.OldFormat
         [System.Xml.Serialization.XmlElement(ElementName = "cognome")]
         public string Surname;
 
-        [System.Xml.Serialization.XmlElement(ElementName = "cod_autore")]
-        public string Code;
-
         public string GetFullName() { return Name + " " + Surname; }
     }
 }

@@ -16,22 +16,16 @@ namespace XmlLibrary.OldFormat
         public string DewayCode;
 
         [System.Xml.Serialization.XmlElement(ElementName = "titolo")]
-        public Title Title;
+        public string Title;
 
         [System.Xml.Serialization.XmlElement(ElementName = "autore")]
         public Author Author;
 
-        [System.Xml.Serialization.XmlElement(ElementName = "dati_amministrativi")]
-        public AmministrativeData AmministrativeData;
-
         [System.Xml.Serialization.XmlElement(ElementName = "abstract")]
-        public Description Description;
+        public string Description;
 
-        [System.Xml.Serialization.XmlElement(ElementName = "pubblicazione")]
-        public Publishing Publishing;
-
-        [System.Xml.Serialization.XmlElement(ElementName = "edizione")]
-        public Edition Edition;
+        [System.Xml.Serialization.XmlElement(ElementName = "genere")]
+        public string Type;
 
         [System.Xml.Serialization.XmlElement(ElementName = "tipo_materiale")]
         public string FormatType;
