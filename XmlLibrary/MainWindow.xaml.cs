@@ -14,16 +14,27 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Timers;
+using System.Windows.Threading;
 
-namespace XmlLibrary
-{
+namespace XmlLibrary {
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
         // the timer used when need to put an 
         // "asyncronous" message on a label, like an error
-        private Timer timer;
+        private DispatcherTimer timer;
+
+        /**
+         * Prints on the label <l> the message <msg> with the given color <col>
+         * 
+         * @param l:        the label where print
+         * @param msg:      the message to print
+         * @param col:      the color of the message
+         */
+        private void AsyncMessageOn(Label l, string msg, Brushes col) {
+
+        }
 
         /**
          * Main window constructor
@@ -32,7 +43,7 @@ namespace XmlLibrary
             // initializate the componets
             InitializeComponent();
             // create the timer
-            timer = new Timer(1500);
+            timer = new DispatcherTimer();
         }
 
         /**
@@ -55,6 +66,13 @@ namespace XmlLibrary
                 MessageBox.Show(txtFrom.Text + " doesn't contains any text");
                 return;
             }
+        }
+
+        /**
+         * Text changed event for <txtFrom> textfield
+         */
+        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e) {
+
         }
     }
 }
