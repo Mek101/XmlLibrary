@@ -70,8 +70,12 @@ namespace XmlLibrary
         /// </summary>
         public void RemoveAbstract()
         {
-            var useless = from doc in _documents
-                          select doc.Element("wiride").Element("abstract").Remove();
+            IEnumerable<XNode> temp = from doc in _documents
+                                      where doc.Element("wiride").Element("abstract").Value != null
+                                      select doc;
+
+            foreach (XNode n in temp)
+                n.Remove();
         }
 
 
