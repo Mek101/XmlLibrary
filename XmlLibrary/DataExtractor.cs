@@ -10,7 +10,10 @@ namespace XmlLibrary
 {
     class DataExtractor
     {
+        // Default path to save the file to
         private const string PATH = @"..\..\";
+
+        // Collection of XElements to work and query on
         XElement[] _documents;
 
         public DataExtractor(XDocument documentsSource)
@@ -26,6 +29,7 @@ namespace XmlLibrary
         /// <returns></returns>
         public string[] GetTitleByAuthor(string author)
         {
+            // Extracts all the authors
             IEnumerable<string> authors = from doc in _documents
                                           where doc.Element("wiride").Element("autore").Element("nome").Value == author
                                           select doc.Element("wiride").Element("titolo").Value;
@@ -94,7 +98,9 @@ namespace XmlLibrary
         }
 
 
-
+        /// <summary>
+        /// Creates a subset and saves them in a new file
+        /// </summary>
         public void MakeSubset()
         {
             // Create a new Xml document
