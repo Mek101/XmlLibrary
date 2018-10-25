@@ -63,6 +63,36 @@ namespace XmlLibrary {
             }
         }
 
+        private void btnSAuth_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCTitle_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCGender_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRAbstract_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMGender_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNLibShort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         /**
          * Text changed event for <txtFrom> textfield
          */
@@ -71,6 +101,9 @@ namespace XmlLibrary {
             lblFrom.Content = "From";
         }
 
+        /**
+         * Text changed event for <txtTo> textfield
+         */
         private void txtTo_TextChanged(object sender, TextChangedEventArgs e) {
             lblTo.Foreground = Brushes.Black;
             lblTo.Content = "To";
