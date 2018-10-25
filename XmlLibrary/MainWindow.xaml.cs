@@ -67,6 +67,13 @@ namespace XmlLibrary {
          * Text changed event for <txtFrom> textfield
          */
         private void txtFrom_TextChanged(object sender, TextChangedEventArgs e) {
+            lblFrom.Foreground = Brushes.Black;
+            lblFrom.Content = "From";
+        }
+
+        private void txtTo_TextChanged(object sender, TextChangedEventArgs e) {
+            lblTo.Foreground = Brushes.Black;
+            lblTo.Content = "To";
         }
     }
 }

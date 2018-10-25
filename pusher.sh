@@ -5,10 +5,11 @@
 pull=1
 commit=1
 push=1
-comm_msg=''
+comm_msg=()
 
 # parse the command line parameters
 for arg in $@; do
+    echo $arg
     # switch the arguments
     case $arg in
         # disables the pull request first of all
@@ -25,23 +26,23 @@ for arg in $@; do
                 exit 1
             fi
             # copy the string
-            comm_msg=$arg
+            comm_msg=( $comm_msg $arg )
             ;;
     esac
 done
 
-# first do the pull if requested
-if [ $pull -eq 1 ]; then
-    git pull origin master
-fi
-
-# second do the commit
-if [ $commit -eq 1 ]; then
-    git add '.'
-    git commit -m $comm_msg
-fi
-
-# then do the push
-if [ $push -eq 1 ]; then
-    git push origin master
-fi
+## first do the pull if requested
+#if [ $pull -eq 1 ]; then
+#    git pull origin master
+#fi
+#
+## second do the commit
+#if [ $commit -eq 1 ]; then
+#    git add '.'
+#    git commit -m $comm_msg
+#fi
+#
+## then do the push
+#if [ $push -eq 1 ]; then
+#    git push origin master
+#fi
