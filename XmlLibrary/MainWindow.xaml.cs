@@ -13,17 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
-using System.Timers;
 
-namespace XmlLibrary
-{
+namespace XmlLibrary {
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        // the timer used when need to put an 
-        // "asyncronous" message on a label, like an error
-        private Timer timer;
+        // flag for <txtFrom_Changed> that tells 
+        // whether there is a error message printed on
+        private bool txtFromErr;
+        // flag for <txtTo_Changed> that tells 
+        // whether there is a error message printed on
+        private bool txtToErr;
 
         /**
          * Main window constructor
@@ -31,8 +32,6 @@ namespace XmlLibrary
         public MainWindow() {
             // initializate the componets
             InitializeComponent();
-            // create the timer
-            timer = new Timer(1500);
         }
 
         /**
@@ -41,11 +40,18 @@ namespace XmlLibrary
         private void btnConvert_Click(object sender, RoutedEventArgs e) {
             // get the text into the two textboxes
             if (String.IsNullOrEmpty(txtFrom.Text) || String.IsNullOrEmpty(txtTo.Text)) {
-                // show outsise a message to warn the user
-                var label = (txtFrom.Text == String.Empty ? txtFrom : txtTo);
+                // get the label first
+                Label label = (
+                    // check wich textfield is empty
+                    txtFrom.Text == String.Empty ? 
+                    // so get its label
+                    lblFrom : 
+                    lblTo
+                );
+                // assign the color red for the error
                 label.Foreground = Brushes.Red;
-                string old = label.Text;
-                label.Text = "Missing path";
+                // put the error message now
+                label.Content = "Missing path";
                 return;
             }
 
@@ -55,6 +61,19 @@ namespace XmlLibrary
                 MessageBox.Show(txtFrom.Text + " doesn't contains any text");
                 return;
             }
+        }
+
+        /**
+         * Text changed event for <txtFrom> textfield
+         */
+        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e) {
+            lblFrom.Foreground = Brushes.Black;
+            lblFrom.Content = "From";
+        }
+
+        private void txtTo_TextChanged(object sender, TextChangedEventArgs e) {
+            lblTo.Foreground = Brushes.Black;
+            lblTo.Content = "To";
         }
     }
 }
