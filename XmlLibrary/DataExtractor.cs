@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 using System.Xml;
 
 namespace XmlLibrary
 {
     class DataExtractor
     {
+        private const string PATH = @"..\..\";
         XElement[] _documents;
 
         public DataExtractor(XDocument documentsSource)
@@ -111,7 +113,11 @@ namespace XmlLibrary
             // Adds the nodes
             newFormat.Root.AddFirst(nodes.ToArray());
 
-            newFormat.Save()
+            // Saves the xml document with an asyncronous task
+            //new Task(delegate()
+            //{
+                newFormat.Save(PATH + "libriShort.xml")
+            //});
         }
 
     }
