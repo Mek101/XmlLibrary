@@ -11,7 +11,7 @@ namespace XmlLibrary
     {
         XElement[] _documents;
 
-        public DataExtractor(XDocument[] documentsSource)
+        public DataExtractor(XDocument documentsSource)
         {
             _documents = documentsSource.Descendants("Bibliotca").ToArray();
         }
@@ -87,15 +87,31 @@ namespace XmlLibrary
         public void ChangeGenereByTitle(string title, string genere)
         {
             var veryUsefulVar = from doc in _documents
-                             where doc.Element("wiride").Element("titolo").Value == title
-                             select doc.Element("wiride").Element("genere").Value = genere;
+                                where doc.Element("wiride").Element("titolo").Value == title
+                                select doc.Element("wiride").Element("genere").Value = genere;
         }
 
 
 
         public void MakeSubset()
         {
+            // Create a new Xml document
+            XDocument newFormat = new XDocument(new XElement("biblioteca"));
 
+            // Creates the nodes
+            IEnumerable<XElement> nodes = from book in _documents
+                                          select new XElement(
+                                              new XElement("libro",
+                                                  new XElement("codice_scheda", book.Element("wiride").Element("codice_scheda").Value),
+                                                  new XElement("titolo", book.Element("wiride").Element("titolo").Value),
+                                                  new XElement("cognome_autore", book.Element("wiride").Element("autore").Element("cognome").Value)
+                                              )
+                                           );
+
+            // Adds the nodes
+            newFormat.Root.AddFirst(nodes.ToArray());
+
+            newFormat.Save()
         }
 
     }
