@@ -32,5 +32,48 @@ namespace XmlLibrary
 
         }
 
+
+        /// <summary>
+        /// Returns the number of copies of the given book
+        /// </summary>
+        /// <returns></returns>
+        public uint GetCopiesBytitle(string title)
+        {
+            uint copies = 0;
+
+            var thsDck = from doc in _documents
+                         where doc.Element("titolo").Value == title
+                         select new { copies = copies++, doc.NextNode };
+
+            return copies;
+        }
+
+
+        /// <summary>
+        /// Returns the number of 
+        /// </summary>
+        /// <returns></returns>
+        public uint GetNumberByGivenGenere(string genere)
+        {
+            uint copies = 0;
+
+            var thsDck = from doc in _documents
+                         where doc.Element("genere").Value == genere
+                         select new { copies = copies++, doc.NextNode };
+
+            return copies;
+        }
+
+
+        /// <summary>
+        /// Removes the abstract tag and contenent from the document
+        /// </summary>
+        public void RemoveAbstract()
+        {
+            var useless = from doc in _documents
+                          select doc.Element("abstract").Remove();
+        }
+
+
     }
 }
