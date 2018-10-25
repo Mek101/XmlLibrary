@@ -71,10 +71,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <Compile Include="OldFormat\Author.cs" />
->>>>>>> 416fce6ef2ea7f7a26e3f9fc2dec143b51542483
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
