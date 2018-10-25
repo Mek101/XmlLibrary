@@ -9,11 +9,11 @@ namespace XmlLibrary
 {
     class DataExtractor
     {
-        XDocument[] _documents;
+        XElement[] _documents;
 
         public DataExtractor(XDocument[] documentsSource)
         {
-            _documents = documentsSource;
+            _documents = documentsSource.Descendants("Bibliotca").ToArray();
         }
 
 
@@ -25,8 +25,8 @@ namespace XmlLibrary
         public string[] GetTitleByAuthor(string author)
         {
             IEnumerable<string> authors = from doc in _documents
-                                          where doc.Element("autore").Element("nome").Value == author
-                                          select doc.Element("titolo").Value;
+                                          where doc.Element("wiride").Element("autore").Element("nome").Value == author
+                                          select doc.Element("wiride").Element("titolo").Value;
 
             return authors.ToArray<string>();
 
@@ -42,7 +42,7 @@ namespace XmlLibrary
             uint copies = 0;
 
             var thsDck = from doc in _documents
-                         where doc.Element("titolo").Value == title
+                         where doc.Element("wiride").Element("titolo").Value == title
                          select new { copies = copies++, doc.NextNode };
 
             return copies;
@@ -71,9 +71,28 @@ namespace XmlLibrary
         public void RemoveAbstract()
         {
             var useless = from doc in _documents
-                          select doc.Element("abstract").Remove();
+                          select doc.Element("wiride").Element("abstract").Remove();
         }
 
+
+        /// <summary>
+        /// Changes the genere of the given book
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="genere"></param>
+        public void ChangeGenereByTitle(string title, string genere)
+        {
+            var veryUsefulVar = from doc in _documents
+                             where doc.Element("wiride").Element("titolo").Value == title
+                             select doc.Element("wiride").Element("genere").Value = genere;
+        }
+
+
+
+        public void MakeSubset()
+        {
+
+        }
 
     }
 }
