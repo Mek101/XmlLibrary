@@ -15,7 +15,7 @@ namespace XmlLibrary
 
         public DataExtractor(XDocument documentsSource)
         {
-            _documents = documentsSource.Descendants("Bibliotca").ToArray();
+            _documents = documentsSource.Descendants("bibliotca").ToArray();
         }
 
 
@@ -116,7 +116,7 @@ namespace XmlLibrary
             // Saves the xml document with an asyncronous task
             //new Task(delegate()
             //{
-                newFormat.Save(PATH + "libriShort.xml")
+            newFormat.Save(PATH + "libriShort.xml");
             //});
         }
 
