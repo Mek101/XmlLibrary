@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:XmlLibrary"
         mc:Ignorable="d"
         Title="MainWindow" Height="289.516" Width="800">
-    <Grid>
+    <Grid Background="#FF6C1616">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace XmlLibrary {
     /// <summary>
@@ -25,6 +27,8 @@ namespace XmlLibrary {
         // flag for <txtTo_Changed> that tells 
         // whether there is a error message printed on
         private bool txtToErr;
+        // the xml document construction
+        private DataExtractor extractor;
 
         /**
          * Main window constructor
@@ -61,35 +65,33 @@ namespace XmlLibrary {
                 MessageBox.Show(txtFrom.Text + " doesn't contains any text");
                 return;
             }
+            // load into the extractor
+            extractor = new DataExtractor(XDocument.Parse(text));
         }
 
-        private void btnSAuth_Click(object sender, RoutedEventArgs e)
-        {
-
+        private void btnSAuth_Click(object sender, RoutedEventArgs e) {
+            // get the content of the input text
+            if (txtMod.Text == String.Empty) return;
+            // 
         }
 
-        private void btnCTitle_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCGender_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnCTitle_Click(object sender, RoutedEventArgs e) {
 
         }
 
-        private void btnRAbstract_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnCGender_Click(object sender, RoutedEventArgs e) {
 
         }
 
-        private void btnMGender_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
 
         }
 
-        private void btnNLibShort_Click(object sender, RoutedEventArgs e)
-        {
+        private void btnMGender_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
 
         }
 
