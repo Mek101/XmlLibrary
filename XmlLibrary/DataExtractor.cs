@@ -18,7 +18,8 @@ namespace XmlLibrary
 
         public DataExtractor(XDocument documentsSource)
         {
-            _documents = documentsSource.Descendants("bibliotca").ToArray();
+            // Extracts all the elements now to increase efficency
+            _documents = documentsSource.Descendants("biblioteca").ToArray();
         }
 
 
@@ -34,8 +35,8 @@ namespace XmlLibrary
                                           where doc.Element("wiride").Element("autore").Element("nome").Value == author
                                           select doc.Element("wiride").Element("titolo").Value;
 
+            // Returns an array with the authors
             return authors.ToArray<string>();
-
         }
 
 
@@ -56,15 +57,15 @@ namespace XmlLibrary
 
 
         /// <summary>
-        /// Returns the number of 
+        /// Returns the number of books with the given genre.
         /// </summary>
-        /// <returns></returns>
-        public uint GetNumberByGivenGenere(string genere)
+        /// <returns>The number of authors.</returns>
+        public uint GetNumberByGivenGenre(string genre)
         {
             uint copies = 0;
 
             var thsDck = from doc in _documents
-                         where doc.Element("genere").Value == genere
+                         where doc.Element("genere").Value == genre
                          select new { copies = copies++, doc.NextNode };
 
             return copies;
@@ -72,29 +73,35 @@ namespace XmlLibrary
 
 
         /// <summary>
-        /// Removes the abstract tag and contenent from the document
+        /// Removes the abstract tag and it's contenent from the document.
         /// </summary>
         public void RemoveAbstract()
         {
+            /*
             IEnumerable<XNode> temp = from doc in _documents
                                       where doc.Element("wiride").Element("abstract").Value != null
                                       select doc;
 
-            foreach (XNode n in temp)
-                n.Remove();
+            foreach (XNode node in temp)
+                node.Remove();
+              */
+            
+            // Not Linq but is --SHOULD-- work...
+            foreach (XElement element in _documents)
+                element.Descendants("wiride").Descendants("abstract").Remove();
         }
 
 
         /// <summary>
-        /// Changes the genere of the given book
+        /// Changes the genre of the given book.
         /// </summary>
-        /// <param name="title"></param>
-        /// <param name="genere"></param>
-        public void ChangeGenereByTitle(string title, string genere)
+        /// <param name="title">Title of the book.</param>
+        /// <param name="genre">Genre to set.</param>
+        public void ChangeGenreByTitle(string title, string genre)
         {
             var veryUsefulVar = from doc in _documents
                                 where doc.Element("wiride").Element("titolo").Value == title
-                                select doc.Element("wiride").Element("genere").Value = genere;
+                                select doc.Element("wiride").Element("genere").Value = genre;
         }
 
 
@@ -106,7 +113,7 @@ namespace XmlLibrary
             // Create a new Xml document
             XDocument newFormat = new XDocument(new XElement("biblioteca"));
 
-            // Creates the nodes
+            // Creates a collection with the nodes
             IEnumerable<XElement> nodes = from book in _documents
                                           select new XElement(
                                               new XElement("libro",
@@ -116,14 +123,11 @@ namespace XmlLibrary
                                               )
                                            );
 
-            // Adds the nodes
+            // Adds the nodes in the root
             newFormat.Root.AddFirst(nodes.ToArray());
 
-            // Saves the xml document with an asyncronous task
-            //new Task(delegate()
-            //{
+            // Saves the xml document
             newFormat.Save(PATH + "libriShort.xml");
-            //});
         }
 
     }
