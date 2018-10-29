@@ -89,7 +89,7 @@ namespace XmlLibrary {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
 
-            // count the gender
+            // count the genre
             lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
         }
 
@@ -100,7 +100,7 @@ namespace XmlLibrary {
         }
 
         private void btnMGender_Click(object sender, RoutedEventArgs e) {
-
+            
         }
 
         private void btnNLibShort_Click(object sender, RoutedEventArgs e) {

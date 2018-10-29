@@ -84,7 +84,7 @@ namespace XmlLibrary
 
             foreach (XNode node in temp)
                 node.Remove();
-              */
+             */
             
             // Not Linq but is --SHOULD-- work...
             foreach (XElement element in _documents)
