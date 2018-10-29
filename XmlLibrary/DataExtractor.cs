@@ -85,10 +85,13 @@ namespace XmlLibrary
             foreach (XNode node in temp)
                 node.Remove();
              */
-            
+
             // Not Linq but is --SHOULD-- work...
-            foreach (XElement element in _documents)
-                element.Descendants("wiride").Descendants("abstract").Remove();
+            /*foreach (XElement element in _documents)
+                element.Descendants("wiride").Descendants("abstract").Remove();*/
+
+            // Also this, it's not Linq too but is --SHOULD-- work...
+            _documents.Elements<XElement>().Where<XElement>(elem => elem.Name == "abstract").Remove<XElement>();
         }
 
 
