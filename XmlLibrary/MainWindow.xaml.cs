@@ -90,7 +90,7 @@ namespace XmlLibrary {
             if (txtMod.Text == String.Empty) return;
 
             // count the gender
-            lblOutput.Content = extractor.GetNumberByGivenGenere(txtMod.Text).ToString();
+            lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
         }
 
         private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
