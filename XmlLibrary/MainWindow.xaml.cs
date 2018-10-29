@@ -72,19 +72,31 @@ namespace XmlLibrary {
         private void btnSAuth_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
-            // 
+
+            // check using the author
+            lblOutput.Content = extractor.GetTitleByAuthor(txtMod.Text);
         }
 
         private void btnCTitle_Click(object sender, RoutedEventArgs e) {
+            // get the content of the input text
+            if (txtMod.Text == String.Empty) return;
 
+            // count the titles
+            lblOutput.Content = extractor.GetCopiesBytitle(txtMod.Text).ToString();
         }
 
         private void btnCGender_Click(object sender, RoutedEventArgs e) {
+            // get the content of the input text
+            if (txtMod.Text == String.Empty) return;
 
+            // count the gender
+            lblOutput.Content = extractor.GetNumberByGivenGenere(txtMod.Text).ToString();
         }
 
         private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
-
+            // remove the abstracts
+            extractor.RemoveAbstract();
+            lblOutput.Content = "Done";
         }
 
         private void btnMGender_Click(object sender, RoutedEventArgs e) {
