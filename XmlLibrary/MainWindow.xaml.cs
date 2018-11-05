@@ -49,6 +49,7 @@ namespace XmlLibrary {
             {
                 // load the file
                 string text;
+
                 try
                 {
                     StreamReader stream = new StreamReader(dialog.OpenFile());
@@ -60,58 +61,69 @@ namespace XmlLibrary {
                     MessageBox.Show("File di input non trovato");
                     return;
                 }
+
                 // check for empty file
                 if (String.IsNullOrEmpty(text))                
-                    MessageBox.Show(txtFrom.Text + " doesn't contains any text");
+                    MessageBox.Show("The file doesn't contains any text");
                 else
                     // load into the extractor
                     extractor = new DataExtractor(XDocument.Parse(text));
             }
         }
 
-        private void btnSAuth_Click(object sender, RoutedEventArgs e) {
+        private void btnSAuth_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            if (txtMod.Text == String.Empty) return;
-
-            // check using the author
-            lblOutput.Content = extractor.GetTitleByAuthor(txtMod.Text);
+            if (txtMod.Text != String.Empty)            
+                // check using the author
+                lblOutput.Content = extractor.GetTitleByAuthor(txtMod.Text);
+            
         }
 
-        private void btnCTitle_Click(object sender, RoutedEventArgs e) {
+        private void btnCTitle_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            if (txtMod.Text == String.Empty) return;
-
-            // count the titles
-            lblOutput.Content = extractor.GetCopiesBytitle(txtMod.Text).ToString();
+            if (txtMod.Text != String.Empty)            
+                // count the titles
+                lblOutput.Content = extractor.GetCopiesBytitle(txtMod.Text).ToString();
+            
         }
 
-        private void btnCGender_Click(object sender, RoutedEventArgs e) {
+        private void btnCGender_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            if (txtMod.Text == String.Empty) return;
-
-            // count the genre
-            lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
+            if (txtMod.Text != String.Empty)
+                // count the genre
+                lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
         }
 
-        private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
+        private void btnRAbstract_Click(object sender, RoutedEventArgs e)
+        {
             // remove the abstracts
             extractor.RemoveAbstract();
             lblOutput.Content = "Done";
         }
 
-        private void btnMGender_Click(object sender, RoutedEventArgs e) {
+        private void btnMGender_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            int sepndx;
-            if (txtMod.Text == String.Empty || (sepndx = txtMod.Text.IndexOf(" => ")) < 0) return;
-            // get the input
-            var title = txtMod.Text.Substring(0, sepndx);
-            var ngender = txtMod.Text.Substring(sepndx + 4);
-            // modify
-            extractor.ChangeGenreByTitle(title, ngender);
-            lblOutput.Content = "Done";
+            int sepndx = txtMod.Text.IndexOf(" => ");
+
+            if (txtMod.Text != String.Empty && sepndx >= 0)
+            {
+                // get the input
+                string title = txtMod.Text.Substring(0, sepndx);
+
+                string ngendre = txtMod.Text.Substring(sepndx + 4);
+
+                // modify
+                extractor.ChangeGenreByTitle(title, ngendre);
+                lblOutput.Content = "Done";
+            }
         }
 
-        private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
+        private void btnNLibShort_Click(object sender, RoutedEventArgs e)
+        {
             extractor.MakeSubset("");
             lblOutput.Content = "Done";
         }
@@ -119,7 +131,8 @@ namespace XmlLibrary {
         /**
          * Text changed event for <txtFrom> textfield
          */
-        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e) {
+        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e)
+        {
             lblFrom.Foreground = Brushes.Black;
             lblFrom.Content = "From";
         }
@@ -127,7 +140,8 @@ namespace XmlLibrary {
         /**
          * Text changed event for <txtTo> textfield
          */
-        private void txtTo_TextChanged(object sender, TextChangedEventArgs e) {
+        private void txtTo_TextChanged(object sender, TextChangedEventArgs e)
+        {
             lblTo.Foreground = Brushes.Black;
             lblTo.Content = "To";
         }
