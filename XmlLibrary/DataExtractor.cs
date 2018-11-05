@@ -13,6 +13,9 @@ namespace XmlLibrary
         // Default path to save the file to
         private const string PATH = @"..\..\";
 
+        private const string NEW_FILE = "libriShort.xml";
+
+
         // Collection of XElements to work and query on
         XElement[] _documents;
 
@@ -64,9 +67,9 @@ namespace XmlLibrary
         {
             uint copies = 0;
 
-            var thsDck = from doc in _documents
-                         where doc.Element("genere").Value == genre
-                         select new { copies = copies++, doc.NextNode };
+            var veryHelpful = from doc in _documents
+                              where doc.Element("genere").Value == genre
+                              select new { copies = copies++, doc.NextNode };
 
             return copies;
         }
@@ -90,8 +93,9 @@ namespace XmlLibrary
             /*foreach (XElement element in _documents)
                 element.Descendants("wiride").Descendants("abstract").Remove();*/
 
+
             // Also this, it's not Linq too but is --SHOULD-- work...
-            _documents.Elements<XElement>().Where<XElement>(elem => elem.Name == "abstract").Remove<XElement>();
+            _documents.Elements<XElement>().Where(elem => elem.Name == "abstract").Remove();
         }
 
 
@@ -111,7 +115,7 @@ namespace XmlLibrary
         /// <summary>
         /// Creates a subset and saves them in a new file
         /// </summary>
-        public void MakeSubset()
+        public void MakeSubset(string path)
         {
             // Create a new Xml document
             XDocument newFormat = new XDocument(new XElement("biblioteca"));
@@ -130,7 +134,10 @@ namespace XmlLibrary
             newFormat.Root.AddFirst(nodes.ToArray());
 
             // Saves the xml document
-            newFormat.Save(PATH + "libriShort.xml");
+            if (string.IsNullOrEmpty(path))
+                newFormat.Save(Path.Combine(PATH + NEW_FILE));
+            else
+                newFormat.Save(Path.Combine(path, NEW_FILE));
         }
 
     }
