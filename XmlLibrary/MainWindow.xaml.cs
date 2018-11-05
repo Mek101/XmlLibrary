@@ -108,7 +108,6 @@ namespace XmlLibrary {
         }
 
         private void btnMGender_Click(object sender, RoutedEventArgs e) {
-<<<<<<< HEAD
             // get the content of the input text
             int sepndx;
             if (txtMod.Text == String.Empty || (sepndx = txtMod.Text.IndexOf(" => ")) < 0) return;
@@ -118,9 +117,6 @@ namespace XmlLibrary {
             // modify
             extractor.ChangeGenreByTitle(title, ngender);
             lblOutput.Content = "Done";
-=======
-            
->>>>>>> 5b1eeeea6fa541d48cfd013fe90f10c7cf1d1757
         }
 
         private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
