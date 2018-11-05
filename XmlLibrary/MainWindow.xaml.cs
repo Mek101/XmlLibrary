@@ -60,7 +60,15 @@ namespace XmlLibrary {
             }
 
             // load the file
-            string text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+            string text;
+            try {
+                text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+            }
+            catch {
+                MessageBox.Show("File di input non trovato");
+                return;
+            }
+            // check for empty file
             if (String.IsNullOrEmpty(text)) {
                 MessageBox.Show(txtFrom.Text + " doesn't contains any text");
                 return;
@@ -100,11 +108,20 @@ namespace XmlLibrary {
         }
 
         private void btnMGender_Click(object sender, RoutedEventArgs e) {
-
+            // get the content of the input text
+            int sepndx;
+            if (txtMod.Text == String.Empty || (sepndx = txtMod.Text.IndexOf(" => ")) < 0) return;
+            // get the input
+            var title = txtMod.Text.Substring(0, sepndx);
+            var ngender = txtMod.Text.Substring(sepndx + 4);
+            // modify
+            extractor.ChangeGenreByTitle(title, ngender);
+            lblOutput.Content = "Done";
         }
 
         private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
-
+            extractor.MakeSubset();
+            lblOutput.Content = "Done";
         }
 
         /**
