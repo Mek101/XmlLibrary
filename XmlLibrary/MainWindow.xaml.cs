@@ -77,6 +77,9 @@ namespace XmlLibrary {
             extractor = new DataExtractor(XDocument.Parse(text));
         }
 
+        /**
+         * Button action method
+         */
         private void btnSAuth_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
@@ -85,6 +88,9 @@ namespace XmlLibrary {
             lblOutput.Content = extractor.GetTitleByAuthor(txtMod.Text);
         }
 
+        /**
+         * Button action method
+         */
         private void btnCTitle_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
@@ -93,6 +99,9 @@ namespace XmlLibrary {
             lblOutput.Content = extractor.GetCopiesBytitle(txtMod.Text).ToString();
         }
 
+        /**
+         * Button action method
+         */
         private void btnCGender_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
@@ -101,12 +110,18 @@ namespace XmlLibrary {
             lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
         }
 
+        /**
+         * Button action method
+         */
         private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
             // remove the abstracts
             extractor.RemoveAbstract();
             lblOutput.Content = "Done";
         }
 
+        /**
+         * Button action method
+         */
         private void btnMGender_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             int sepndx;
@@ -119,6 +134,9 @@ namespace XmlLibrary {
             lblOutput.Content = "Done";
         }
 
+        /**
+         * Button action method
+         */
         private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
