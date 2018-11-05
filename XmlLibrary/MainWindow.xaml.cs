@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Microsoft.Win32;
 
 namespace XmlLibrary {
     /// <summary>
@@ -42,39 +43,30 @@ namespace XmlLibrary {
          * Button action method
          */
         private void btnConvert_Click(object sender, RoutedEventArgs e) {
-            // get the text into the two textboxes
-            if (String.IsNullOrEmpty(txtFrom.Text) || String.IsNullOrEmpty(txtTo.Text)) {
-                // get the label first
-                Label label = (
-                    // check wich textfield is empty
-                    txtFrom.Text == String.Empty ? 
-                    // so get its label
-                    lblFrom : 
-                    lblTo
-                );
-                // assign the color red for the error
-                label.Foreground = Brushes.Red;
-                // put the error message now
-                label.Content = "Missing path";
-                return;
-            }
+            OpenFileDialog dialog = new OpenFileDialog();
 
-            // load the file
-            string text;
-            try {
-                text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+            if ((bool)dialog.ShowDialog())
+            {
+                // load the file
+                string text;
+                try
+                {
+                    StreamReader stream = new StreamReader(dialog.OpenFile());
+
+                    text = stream.ReadToEnd();
+                }
+                catch
+                {
+                    MessageBox.Show("File di input non trovato");
+                    return;
+                }
+                // check for empty file
+                if (String.IsNullOrEmpty(text))                
+                    MessageBox.Show(txtFrom.Text + " doesn't contains any text");
+                else
+                    // load into the extractor
+                    extractor = new DataExtractor(XDocument.Parse(text));
             }
-            catch {
-                MessageBox.Show("File di input non trovato");
-                return;
-            }
-            // check for empty file
-            if (String.IsNullOrEmpty(text)) {
-                MessageBox.Show(txtFrom.Text + " doesn't contains any text");
-                return;
-            }
-            // load into the extractor
-            extractor = new DataExtractor(XDocument.Parse(text));
         }
 
         private void btnSAuth_Click(object sender, RoutedEventArgs e) {
@@ -120,7 +112,7 @@ namespace XmlLibrary {
         }
 
         private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
-            extractor.MakeSubset();
+            extractor.MakeSubset("");
             lblOutput.Content = "Done";
         }
 
