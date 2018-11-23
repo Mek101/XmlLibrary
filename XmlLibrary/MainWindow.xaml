@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XmlLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="289.516" Width="800">
-    <Grid Background="#FF6C1616">
+        Title="MainWindow" Height="472.516" Width="800">
+    <Grid Background="Azure">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnConvert" Content="Convert" Margin="227,106,0,0" HorizontalAlignment="Left" Width="338" Grid.ColumnSpan="2" Height="35" VerticalAlignment="Top" Click="btnConvert_Click"/>
+        <Button x:Name="btn_load" Content="Load" Margin="10,103,0,0" HorizontalAlignment="Left" Width="330" Height="35" VerticalAlignment="Top" Click="btn_Load_Click"/>
         <TextBox x:Name="txtFrom" HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Width="330" Height="40" VerticalAlignment="Top" TextChanged="txtFrom_TextChanged"/>
         <Label x:Name="lblFrom" Content="From" Margin="10,10,0,414" HorizontalAlignment="Left" Width="330"/>
         <TextBox x:Name="txtTo" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="49,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" TextChanged="txtTo_TextChanged"/>
@@ -23,7 +23,8 @@
         <Button x:Name="btnRAbstract" Content="Rem 'abstract' tag" Grid.Column="1" HorizontalAlignment="Left" Margin="16,216,0,0" VerticalAlignment="Top" Width="123" Height="33" Click="btnRAbstract_Click"/>
         <Button x:Name="btnMGender" Content="Mod Gender by title" Grid.Column="1" HorizontalAlignment="Left" Margin="144,216,0,0" VerticalAlignment="Top" Width="121" Height="33" Click="btnMGender_Click"/>
         <Button x:Name="btnNLibShort" Content="Create libShort.xml" Grid.Column="1" HorizontalAlignment="Left" Margin="270,216,0,0" VerticalAlignment="Top" Width="116" Height="33" Click="btnNLibShort_Click"/>
-        <Label x:Name="lblOutput" Content="" Margin="20,216,0,0" VerticalAlignment="Top" Height="33"/>
+        <Button x:Name="btn_save" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="49,103,0,0" VerticalAlignment="Top" Width="337" Height="35" Click="btn_save_Click"/>
+        <ListBox x:Name="lst_output" HorizontalAlignment="Left" Height="198" Margin="20,234,0,0" VerticalAlignment="Top" Width="376"/>
 
     </Grid>
 </Window>

@@ -11,18 +11,21 @@ namespace XmlLibrary
     class DataExtractor
     {
         // Default path to save the file to
-        private const string PATH = @"..\..\";
+        private const string PATH = @"..\..\..\";
 
-        private const string NEW_FILE = "libriShort.xml";
+        private const string NEW_FILE = "libriNew.xml";
+        private const string SHORT_FILE = "libriShort.xml";
+
+        private const string ROOT_NAME = "Biblioteca";
 
 
         // Collection of XElements to work and query on
-        XElement[] _documents;
+        XElement[] _xElements;
 
         public DataExtractor(XDocument documentsSource)
         {
             // Extracts all the elements now to increase efficency
-            _documents = documentsSource.Descendants("biblioteca").ToArray();
+            _xElements = documentsSource.Descendants(ROOT_NAME).ToArray();
         }
 
 
@@ -33,10 +36,12 @@ namespace XmlLibrary
         /// <returns></returns>
         public string[] GetTitleByAuthor(string author)
         {
+            author = author.ToLower();
+
             // Extracts all the authors
-            IEnumerable<string> authors = from doc in _documents
-                                          where doc.Element("wiride").Element("autore").Element("nome").Value == author
-                                          select doc.Element("wiride").Element("titolo").Value;
+            IEnumerable<string> authors = from elem in _xElements
+                                          where elem.Element("wiride").Element("autore").Element("nome").Value.ToLower() == author
+                                          select elem.Element("wiride").Element("titolo").Value;
 
             // Returns an array with the authors
             return authors.ToArray<string>();
@@ -49,13 +54,13 @@ namespace XmlLibrary
         /// <returns></returns>
         public uint GetCopiesBytitle(string title)
         {
-            uint copies = 0;
+            title = title.ToLower();
 
-            var thsDck = from doc in _documents
-                         where doc.Element("wiride").Element("titolo").Value == title
-                         select new { copies = copies++, doc.NextNode };
+            IEnumerable<object> collector = from elem in _xElements
+                                            where elem.Element("wiride").Element("titolo").Value.ToLower() == title
+                                            select elem;
 
-            return copies;
+            return (uint)collector.Count();
         }
 
 
@@ -65,13 +70,13 @@ namespace XmlLibrary
         /// <returns>The number of authors.</returns>
         public uint GetNumberByGivenGenre(string genre)
         {
-            uint copies = 0;
+            genre = genre.ToLower();
 
-            var veryHelpful = from doc in _documents
-                              where doc.Element("genere").Value == genre
-                              select new { copies = copies++, doc.NextNode };
+            IEnumerable<object> collector = from elem in _xElements
+                                            where elem.Element("wiride").Element("genere").Value.ToLower() == genre
+                                            select elem;
 
-            return copies;
+            return (uint)collector.Count();
         }
 
 
@@ -90,12 +95,12 @@ namespace XmlLibrary
              */
 
             // Not Linq but is --SHOULD-- work...
-            /*foreach (XElement element in _documents)
-                element.Descendants("wiride").Descendants("abstract").Remove();*/
+            foreach (XElement element in _xElements)
+                element.Descendants("wiride").Descendants("abstract").Remove();
 
 
             // Also this, it's not Linq too but is --SHOULD-- work...
-            _documents.Elements<XElement>().Where(elem => elem.Name == "abstract").Remove();
+            //_xElements.Elements<XElement>().Where(elem => elem.Name == "abstract").Remove();
         }
 
 
@@ -106,22 +111,30 @@ namespace XmlLibrary
         /// <param name="genre">Genre to set.</param>
         public void ChangeGenreByTitle(string title, string genre)
         {
-            var veryUsefulVar = from doc in _documents
-                                where doc.Element("wiride").Element("titolo").Value == title
-                                select doc.Element("wiride").Element("genere").Value = genre;
+            title = title.ToLower();
+
+            var veryUsefulVar = from elem in _xElements
+                                where elem.Element("titolo").Value.ToLower() == title
+                                select elem.Element("genere").Value = genre;
         }
+
 
 
         /// <summary>
         /// Creates a subset and saves them in a new file
         /// </summary>
-        public void MakeSubset(string path)
+        public void MakeSubset() { MakeSubset(Path.Combine(PATH, SHORT_FILE)); }
+
+        /// <summary>
+        /// Creates a subset and saves them in a new file
+        /// </summary>
+        public bool MakeSubset(string path)
         {
             // Create a new Xml document
             XDocument newFormat = new XDocument(new XElement("biblioteca"));
 
             // Creates a collection with the nodes
-            IEnumerable<XElement> nodes = from book in _documents
+            IEnumerable<XElement> nodes = from book in _xElements
                                           select new XElement(
                                               new XElement("libro",
                                                   new XElement("codice_scheda", book.Element("wiride").Element("codice_scheda").Value),
@@ -133,11 +146,50 @@ namespace XmlLibrary
             // Adds the nodes in the root
             newFormat.Root.AddFirst(nodes.ToArray());
 
-            // Saves the xml document
-            if (string.IsNullOrEmpty(path))
-                newFormat.Save(Path.Combine(PATH + NEW_FILE));
-            else
-                newFormat.Save(Path.Combine(path, NEW_FILE));
+            return SaveFile(path, newFormat);
+        }
+
+
+        public void SaveDocument() { SaveDocument(Path.Combine(PATH, NEW_FILE)); }
+
+        /// <summary>
+        /// Saves on disk the current document
+        /// </summary>
+        /// <param name="path">Path to save the file. Uses the default value if empty.</param>
+        public bool SaveDocument(string path)
+        {
+            return SaveFile(path, MakeDocument());
+        }
+
+
+        // Writes the document on the list
+        private bool SaveFile(string path, XDocument document)
+        {
+            try
+            {
+                document.Save(Path.Combine(path));
+                return true;
+
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+
+        private XDocument MakeDocument()
+        {
+            XDocument doc = new XDocument(new XElement(ROOT_NAME));
+            doc.Root.AddFirst(_xElements);
+
+            return doc;
+        }
+
+
+        public string Dump()
+        {
+            return MakeDocument().ToString();
         }
 
     }

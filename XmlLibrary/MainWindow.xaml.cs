@@ -16,7 +16,8 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace XmlLibrary {
+namespace XmlLibrary
+{
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
@@ -33,122 +34,143 @@ namespace XmlLibrary {
         /**
          * Main window constructor
          */
-        public MainWindow() {
+        public MainWindow()
+        {
             // initializate the componets
             InitializeComponent();
+            txtFrom.Text = @".\..\..\..\libri.XML";
+            //txtMod.Text = "Primo";
+            btn_Load_Click(this, null);
         }
 
         /**
-         * Button action method
+         * Loads the xml library
          */
-        private void btnConvert_Click(object sender, RoutedEventArgs e) {
+        private void btn_Load_Click(object sender, RoutedEventArgs e)
+        {
             // get the text into the two textboxes
-            if (String.IsNullOrEmpty(txtFrom.Text) || String.IsNullOrEmpty(txtTo.Text)) {
-                // get the label first
-                Label label = (
-                    // check wich textfield is empty
-                    txtFrom.Text == String.Empty ? 
-                    // so get its label
-                    lblFrom : 
-                    lblTo
-                );
-                // assign the color red for the error
-                label.Foreground = Brushes.Red;
-                // put the error message now
-                label.Content = "Missing path";
-                return;
+            if (String.IsNullOrEmpty(txtFrom.Text))
+            {
+                MessageBox.Show("No path!");
             }
+            else
+            {
+                // load the file
+                string text;
+                try
+                {
+                    text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+                }
+                catch
+                {
+                    MessageBox.Show("File di input non trovato");
+                    return;
+                }
 
-            // load the file
-            string text;
-            try {
-                text = File.ReadAllText(txtFrom.Text, Encoding.UTF8);
+                // check for empty file
+                if (String.IsNullOrEmpty(text))
+                    MessageBox.Show(txtFrom.Text + " doesn't contains any text");
+                else
+                {
+                    // load into the extractor
+                    extractor = new DataExtractor(XDocument.Parse(text));
+                    MessageBox.Show("Caricato con successo!");
+
+                    //MessageBox.Show(extractor.Dump());
+                }
             }
-            catch {
-                MessageBox.Show("File di input non trovato");
-                return;
-            }
-            // check for empty file
-            if (String.IsNullOrEmpty(text)) {
-                MessageBox.Show(txtFrom.Text + " doesn't contains any text");
-                return;
-            }
-            // load into the extractor
-            extractor = new DataExtractor(XDocument.Parse(text));
         }
 
         /**
          * Button action method
          */
-        private void btnSAuth_Click(object sender, RoutedEventArgs e) {
+        private void btnSAuth_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            if (txtMod.Text == String.Empty) return;
+            if (txtMod.Text == String.Empty)
+                MessageBox.Show("No input!");
+            else
+            {
+                // check using the author
+                IEnumerable<string> titles = extractor.GetTitleByAuthor(txtMod.Text);
 
-            // check using the author
-            lblOutput.Content = extractor.GetTitleByAuthor(txtMod.Text);
+                lst_output.Items.Add("Trovati " + titles.Count() + " autori.");
+
+                foreach (string str in titles)
+                    lst_output.Items.Add(str);
+            }
         }
 
         /**
          * Button action method
          */
-        private void btnCTitle_Click(object sender, RoutedEventArgs e) {
+        private void btnCTitle_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
 
             // count the titles
-            lblOutput.Content = extractor.GetCopiesBytitle(txtMod.Text).ToString();
+            lst_output.Items.Add(extractor.GetCopiesBytitle(txtMod.Text).ToString());
         }
 
         /**
          * Button action method
          */
-        private void btnCGender_Click(object sender, RoutedEventArgs e) {
+        private void btnCGender_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
 
             // count the genre
-            lblOutput.Content = extractor.GetNumberByGivenGenre(txtMod.Text).ToString();
+            lst_output.Items.Add(extractor.GetNumberByGivenGenre(txtMod.Text).ToString());
         }
 
         /**
          * Button action method
          */
-        private void btnRAbstract_Click(object sender, RoutedEventArgs e) {
+        private void btnRAbstract_Click(object sender, RoutedEventArgs e)
+        {
             // remove the abstracts
             extractor.RemoveAbstract();
-            lblOutput.Content = "Done";
+            lst_output.Items.Add("Done");
         }
 
         /**
          * Button action method
          */
-        private void btnMGender_Click(object sender, RoutedEventArgs e) {
+        private void btnMGender_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
-            int sepndx;
-            if (txtMod.Text == String.Empty || (sepndx = txtMod.Text.IndexOf(" => ")) < 0) return;
-            // get the input
-            var title = txtMod.Text.Substring(0, sepndx);
-            var ngender = txtMod.Text.Substring(sepndx + 4);
-            // modify
-            extractor.ChangeGenreByTitle(title, ngender);
-            lblOutput.Content = "Done";
+            int sepndx = txtMod.Text.IndexOf(" => ");
+
+            if (txtMod.Text != String.Empty && sepndx >= 0)
+            {
+                // get the input
+                var title = txtMod.Text.Substring(0, sepndx);
+                var ngender = txtMod.Text.Substring(sepndx + 4);
+                // modify
+                extractor.ChangeGenreByTitle(title, ngender);
+                lst_output.Items.Add("Done");
+            }
         }
 
         /**
          * Button action method
          */
-        private void btnNLibShort_Click(object sender, RoutedEventArgs e) {
+        private void btnNLibShort_Click(object sender, RoutedEventArgs e)
+        {
             // get the content of the input text
             if (txtMod.Text == String.Empty) return;
 
             extractor.MakeSubset(txtMod.Text);
-            lblOutput.Content = "Done";
+            lst_output.Items.Add("Done");
         }
 
         /**
          * Text changed event for <txtFrom> textfield
          */
-        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e) {
+        private void txtFrom_TextChanged(object sender, TextChangedEventArgs e)
+        {
             lblFrom.Foreground = Brushes.Black;
             lblFrom.Content = "From";
         }
@@ -156,9 +178,13 @@ namespace XmlLibrary {
         /**
          * Text changed event for <txtTo> textfield
          */
-        private void txtTo_TextChanged(object sender, TextChangedEventArgs e) {
+        private void txtTo_TextChanged(object sender, TextChangedEventArgs e)
+        {
             lblTo.Foreground = Brushes.Black;
             lblTo.Content = "To";
         }
+
+
+        private void btn_save_Click(object sender, RoutedEventArgs e) { extractor.SaveDocument(); }
     }
 }
