@@ -11,20 +11,20 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btn_load" Content="Load" Margin="10,103,0,0" HorizontalAlignment="Left" Width="330" Height="35" VerticalAlignment="Top" Click="btn_Load_Click"/>
-        <TextBox x:Name="txtFrom" HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Width="330" Height="40" VerticalAlignment="Top" TextChanged="txtFrom_TextChanged"/>
-        <Label x:Name="lblFrom" Content="From" Margin="10,10,0,414" HorizontalAlignment="Left" Width="330"/>
-        <TextBox x:Name="txtTo" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="49,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" TextChanged="txtTo_TextChanged"/>
-        <Label x:Name="lblTo" Content="To" Grid.Column="1" Margin="49,10,10,414"/>
-        <TextBox x:Name="txtMod" Height="34" Margin="20,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="btn_load" Content="Load" Margin="16,49,0,0" HorizontalAlignment="Left" Width="370" Height="35" VerticalAlignment="Top" Click="btn_Load_Click" Grid.Column="1"/>
+        <TextBox x:Name="txtFrom" HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" Width="376" Height="40" VerticalAlignment="Top" TextChanged="txtFrom_TextChanged"/>
+        <Label x:Name="lblFrom" Content="From:" Margin="10,10,0,398" HorizontalAlignment="Left" Width="330"/>
+        <TextBox x:Name="txtMod" Height="34" Margin="10,143,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="btnSAuth" Content="Find By Author" Grid.Column="1" HorizontalAlignment="Left" Margin="15,177,0,0" VerticalAlignment="Top" Width="124" Height="34" Click="btnSAuth_Click"/>
         <Button x:Name="btnCTitle" Content="Count By Title" Grid.Column="1" HorizontalAlignment="Left" Margin="144,177,0,0" VerticalAlignment="Top" Width="121" Height="34" Click="btnCTitle_Click"/>
         <Button x:Name="btnCGender" Content="Count By Gender" Grid.Column="1" HorizontalAlignment="Left" Margin="270,177,0,0" VerticalAlignment="Top" Width="116" Height="34" Click="btnCGender_Click"/>
         <Button x:Name="btnRAbstract" Content="Rem 'abstract' tag" Grid.Column="1" HorizontalAlignment="Left" Margin="16,216,0,0" VerticalAlignment="Top" Width="123" Height="33" Click="btnRAbstract_Click"/>
         <Button x:Name="btnMGender" Content="Mod Gender by title" Grid.Column="1" HorizontalAlignment="Left" Margin="144,216,0,0" VerticalAlignment="Top" Width="121" Height="33" Click="btnMGender_Click"/>
         <Button x:Name="btnNLibShort" Content="Create libShort.xml" Grid.Column="1" HorizontalAlignment="Left" Margin="270,216,0,0" VerticalAlignment="Top" Width="116" Height="33" Click="btnNLibShort_Click"/>
-        <Button x:Name="btn_save" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="49,103,0,0" VerticalAlignment="Top" Width="337" Height="35" Click="btn_save_Click"/>
-        <ListBox x:Name="lst_output" HorizontalAlignment="Left" Height="198" Margin="20,234,0,0" VerticalAlignment="Top" Width="376"/>
+        <Button x:Name="btn_save" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="16,103,0,0" VerticalAlignment="Top" Width="370" Height="35" Click="btn_save_Click"/>
+        <ListBox x:Name="lst_output" HorizontalAlignment="Left" Height="196" Margin="10,236,0,0" VerticalAlignment="Top" Width="376"/>
+        <Label Content="Input here:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top"/>
+        <Label Content="Output here:" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

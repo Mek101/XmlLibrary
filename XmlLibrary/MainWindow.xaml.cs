@@ -21,13 +21,8 @@ namespace XmlLibrary
     /// <summary>
     /// Logica di interazione per MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        // flag for <txtFrom_Changed> that tells 
-        // whether there is a error message printed on
-        private bool txtFromErr;
-        // flag for <txtTo_Changed> that tells 
-        // whether there is a error message printed on
-        private bool txtToErr;
+    public partial class MainWindow : Window
+    {
         // the xml document construction
         private DataExtractor extractor;
 
@@ -119,10 +114,9 @@ namespace XmlLibrary
         private void btnCGender_Click(object sender, RoutedEventArgs e)
         {
             // get the content of the input text
-            if (txtMod.Text == String.Empty) return;
-
-            // count the genre
-            lst_output.Items.Add(extractor.GetNumberByGivenGenre(txtMod.Text).ToString());
+            if (txtMod.Text != String.Empty) 
+                // count the genre
+                lst_output.Items.Add(extractor.GetNumberByGivenGenre(txtMod.Text).ToString());
         }
 
         /**
@@ -146,8 +140,8 @@ namespace XmlLibrary
             if (txtMod.Text != String.Empty && sepndx >= 0)
             {
                 // get the input
-                var title = txtMod.Text.Substring(0, sepndx);
-                var ngender = txtMod.Text.Substring(sepndx + 4);
+                string title = txtMod.Text.Substring(0, sepndx);
+                string ngender = txtMod.Text.Substring(sepndx + 4);
                 // modify
                 extractor.ChangeGenreByTitle(title, ngender);
                 lst_output.Items.Add("Done");
@@ -175,16 +169,10 @@ namespace XmlLibrary
             lblFrom.Content = "From";
         }
 
-        /**
-         * Text changed event for <txtTo> textfield
-         */
-        private void txtTo_TextChanged(object sender, TextChangedEventArgs e)
+        private void btn_save_Click(object sender, RoutedEventArgs e)
         {
-            lblTo.Foreground = Brushes.Black;
-            lblTo.Content = "To";
+            extractor.SaveDocument();
+            lst_output.Items.Add("Saved on new file.");
         }
-
-
-        private void btn_save_Click(object sender, RoutedEventArgs e) { extractor.SaveDocument(); }
     }
 }
